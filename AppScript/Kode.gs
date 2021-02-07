@@ -17,7 +17,7 @@ function doGet(e) {
 //Recieve parameter and pass it to function to handle
 function insert_value(request, sheet) {
     var id = request.parameter.id;
-    var country = request.parameter.name;
+    var username = request.parameter.name;
     var flag = 1;
     var lr = sheet.getLastRow();
     for (var i = 1; i <= lr; i++) {
@@ -31,7 +31,7 @@ function insert_value(request, sheet) {
     if (flag == 1) {
         var d = new Date();
         var currentTime = d.toLocaleString();
-        var rowData = sheet.appendRow([currentTime, id, country]);
+        var rowData = sheet.appendRow([currentTime, id, username]);
         var result = "Insertion successful";
     }
     result = JSON.stringify({
@@ -88,12 +88,12 @@ function update_value(request, sheet) {
     var output = ContentService.createTextOutput();
     var id = request.parameter.id;
     var flag = 0;
-    var country = request.parameter.name;
+    var username = request.parameter.name;
     var lr = sheet.getLastRow();
     for (var i = 1; i <= lr; i++) {
         var rid = sheet.getRange(i, 2).getValue();
         if (rid == id) {
-            sheet.getRange(i, 3).setValue(country);
+            sheet.getRange(i, 3).setValue(username);
             var result = "value updated successfully";
             flag = 1;
         }
@@ -110,7 +110,7 @@ function update_value(request, sheet) {
 function delete_value(request, sheet) {
     var output = ContentService.createTextOutput();
     var id = request.parameter.id;
-    var country = request.parameter.name;
+    var username = request.parameter.name;
     var flag = 0;
     var lr = sheet.getLastRow();
     for (var i = 1; i <= lr; i++) {
